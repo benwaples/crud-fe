@@ -1,14 +1,19 @@
 import React from 'react';
 import './App.css';
-import { AddHouse } from './components/AddHouse/AddHouse';
-import { HouseList } from './components/HouseList/HouseList';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+import { HousePage } from './pages/HousePage';
 
 function App() {
   return (
-    <>
-   <AddHouse />
-   <HouseList />
-   </>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={HousePage}/>
+      </Switch>
+   </Router>
   );
 }
 
