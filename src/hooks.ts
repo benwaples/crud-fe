@@ -1,11 +1,6 @@
-import { useState } from 'react'
-import { addHouse } from './services/house-api'
-
-type addUrl = {
-  url: string,
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-}
+import { useEffect, useState } from 'react'
+import { addHouse, getHouses } from './services/house-api'
+import { addUrl, House, useHousesType } from './types'
 
 export const useUrl = (): addUrl => {
   const [url, setUrl] = useState('')
@@ -26,5 +21,23 @@ export const useUrl = (): addUrl => {
     url, 
     handleChange, 
     handleSubmit
+  }
+}
+
+export const useHouses = (): useHousesType => {
+  const [houses, setHouses] = useState<House[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    getHouses()
+      .then((houses: House[]) => setHouses(houses))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+  },[])
+  return {
+    houses,
+    loading, 
+    error
   }
 }

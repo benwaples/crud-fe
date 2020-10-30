@@ -1,3 +1,5 @@
+import { House } from "../types"
+
 const api = process.env.LOCALHOST
 
 
@@ -13,4 +15,12 @@ export const addHouse = (url: {url: string}) => {
 } catch(err) {
   return new Error(err)
 }
+}
+
+export const getHouses = (): Promise<House[]> => {
+  
+  return fetch('https://glacial-garden-39406.herokuapp.com/api/v1/houses')
+    .then(res => res.json())
+  
+      
 }

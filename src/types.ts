@@ -1,4 +1,5 @@
 export type House ={
+  id: number,
   address: string, 
   images: string[], 
   price: string,
@@ -6,4 +7,17 @@ export type House ={
   houseSQFT: string, 
   saleStatus: string, 
   lastSold: string,
+}
+
+export type addUrl = {
+  url: string,
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+}
+
+export type useHousesType = {
+  houses: House[];
+  loading: boolean;
+  error: string | null
+
 }
