@@ -1,15 +1,13 @@
 import React from 'react'
 import { useHouses } from '../../hooks'
+import { House } from './House'
 
 export const HouseList = () => {
   const { houses, loading, error} = useHouses()
-
+  
   const houseElements = houses.map(house => (
   <li key={house.id}>
-    <h1>{house.address}</h1>
-    <img src={house.images[0]} alt={house.address}/>
-    <p>{house.price}</p>
-    <p>{house.saleStatus}</p>
+    <House {...house}/>
   </li>))
 
   if(loading) return <h1>Loading...</h1>

@@ -4,23 +4,26 @@ import { addUrl, House, useHousesType } from './types'
 
 export const useUrl = (): addUrl => {
   const [url, setUrl] = useState('')
+  const [houseAdded, setHouseAdded] = useState(false)
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(target.value)
   }
 
-  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+  const useHandleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const house = addHouse({ url })
     console.log(house)
-    
+    setHouseAdded(true)
     return house
   }
 
+
   return {
-    url, 
+    url,
+    houseAdded, 
     handleChange, 
-    handleSubmit
+    useHandleSubmit
   }
 }
 
@@ -35,6 +38,7 @@ export const useHouses = (): useHousesType => {
       .catch((err) => setError(err))
       .finally(() => setLoading(false))
   },[])
+
   return {
     houses,
     loading, 

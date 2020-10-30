@@ -3,10 +3,10 @@ import { useUrl } from '../../hooks'
 
 export const AddHouse = () => {
 
-  const { url, handleChange, handleSubmit } = useUrl()
+  const { url, handleChange, useHandleSubmit } = useUrl()
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={useHandleSubmit}>
       <label htmlFor="url">Listing URL</label>
       <input 
         id="url"
