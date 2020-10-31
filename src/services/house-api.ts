@@ -20,7 +20,10 @@ export const addHouse = (url: {url: string}) => {
 export const getHouses = (): Promise<House[]> => {
   
   return fetch('https://glacial-garden-39406.herokuapp.com/api/v1/houses')
+    .then(res => res.json())     
+}
+
+export const getHouseById = (id: string): Promise<House> => {
+  return fetch('https://glacial-garden-39406.herokuapp.com/api/v1/houses')
     .then(res => res.json())
-  
-      
 }

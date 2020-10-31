@@ -28,20 +28,46 @@ export const useUrl = (): addUrl => {
 }
 
 export const useHouses = (): useHousesType => {
-  const [houses, setHouses] = useState<House[]>([])
+  const [house, setHouses] = useState<House>({id: 1,
+    address: '', 
+    images: '', 
+    price: '',
+    lotSQFT: '', 
+    houseSQFT: '', 
+    saleStatus: '', 
+    lastSold: '',})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     getHouses()
-      .then((houses: House[]) => setHouses(houses))
+      .then((house: House) => setHouses(house))
       .catch((err) => setError(err))
       .finally(() => setLoading(false))
   },[])
 
   return {
-    houses,
+    house,
     loading, 
+    error
+  }
+}
+
+export const useHouseById = (id: string): House => {
+  const [house, setHouse] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    getHouseById(id)
+      .then((house: House) => setHouse(house))
+      .catch(err => setError(err))
+      .finally(() => {setLoading(false)})
+  }, [])
+
+  return {
+    house,
+    loading,
     error
   }
 }
