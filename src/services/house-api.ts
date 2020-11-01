@@ -24,6 +24,6 @@ export const getHouses = (): Promise<House[]> => {
 }
 
 export const getHouseById = (id: string): Promise<House> => {
-  return fetch('https://glacial-garden-39406.herokuapp.com/api/v1/houses')
+  return fetch(`https://glacial-garden-39406.herokuapp.com/api/v1/houses/${id}`)
     .then(res => res.json())
 }

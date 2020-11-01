@@ -6,12 +6,14 @@ import {
   Route
 } from 'react-router-dom'
 import { HousePage } from './pages/HousePage';
+import { DetailPage } from './pages/DetailPage';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/' component={HousePage}/>
+        <Route exact path='/houses' component={HousePage}/>
+        <Route exact path='/houses/:id' component={DetailPage}/>
       </Switch>
    </Router>
   );
