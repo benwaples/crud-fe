@@ -25,12 +25,15 @@ export type addUrl = {
 }
 
 export type useHousesType = {
-  houses: House;
+  houses: House[];
   loading: boolean;
   error: string | null
-
 }
-
+export type useHouseByIdType = {
+  house: House;
+  loading: boolean;
+  error: string | null
+}
 // export type MatchProps = {
 
 // }

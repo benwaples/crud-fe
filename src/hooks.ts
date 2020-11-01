@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
-import { addHouse, getHouses } from './services/house-api'
-import { addUrl, House, useHousesType } from './types'
+import { addHouse, getHouses, getHouseById } from './services/house-api'
+import { 
+  addUrl, 
+  House, 
+  useHousesType, 
+  useHouseByIdType 
+} from './types'
 
 export const useUrl = (): addUrl => {
   const [url, setUrl] = useState('')
@@ -28,7 +33,35 @@ export const useUrl = (): addUrl => {
 }
 
 export const useHouses = (): useHousesType => {
-  const [house, setHouses] = useState<House>({id: 1,
+  const [houses, setHouses] = useState<House[]>([{
+    id: 1,
+    address: '', 
+    images: '', 
+    price: '',
+    lotSQFT: '', 
+    houseSQFT: '', 
+    saleStatus: '', 
+    lastSold: '',
+  }])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    getHouses()
+      .then((houses) => setHouses(houses))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+  },[])
+
+  return {
+    houses,
+    loading, 
+    error
+  }
+}
+
+export const useHouseById = (id: string): useHouseByIdType => {
+  const [house, setHouse] = useState({id: 1,
     address: '', 
     images: '', 
     price: '',
@@ -40,30 +73,11 @@ export const useHouses = (): useHousesType => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    getHouses()
-      .then((house: House) => setHouses(house))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false))
-  },[])
-
-  return {
-    house,
-    loading, 
-    error
-  }
-}
-
-export const useHouseById = (id: string): House => {
-  const [house, setHouse] = useState({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
     getHouseById(id)
       .then((house: House) => setHouse(house))
-      .catch(err => setError(err))
+      .catch((err) => setError(err))
       .finally(() => {setLoading(false)})
-  }, [])
+  }, [id])
 
   return {
     house,
