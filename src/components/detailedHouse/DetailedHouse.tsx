@@ -18,19 +18,21 @@ export const DetailedHouse = ({ id }: { id: number }) => {
   if(loading) return <h1>Loading...</h1>
   if(error) return <h1>Failed to fetch house...</h1>
   return (
-    <div>
+    <div className="DetailedHouse">
       <h1>{house.address}</h1>
       <img src={house.images} alt={house.address} />
-      <p>Price: {house.price}</p>
-      <p>Sale Statue: {house.saleStatus}</p>
-      <p>SqFt: {house.houseSQFT}</p>
-      <p>Lot SqFt: {house.lotSQFT}</p>
-      <p>Last sold: {house.lastSold}</p>
-      {displayUpdateForm ?
-        <UpdateHouse id={id} /> 
-        : 
-        <button onClick={handleDisplay}>Update House</button>}
-      <button onClick={handleDelete}>Delete House</button>
+      <div id="stats">
+        <p><b>Price</b>: {house.price}</p>
+        <p><b>Sale Statue</b>: {house.saleStatus}</p>
+        <p><b>SqFt</b>: {house.houseSQFT}</p>
+        <p><b>Lot SqFt</b>: {house.lotSQFT}</p>
+        <p><b>Last sold</b>: {house.lastSold}</p>
+        {displayUpdateForm ?
+          <UpdateHouse id={id} /> 
+          : 
+          <button onClick={handleDisplay}>Update House</button>}
+        <button id="deleteButton" onClick={handleDelete}>Delete House</button>
+      </div>
     </div>
   )
 }

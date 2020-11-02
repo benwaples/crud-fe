@@ -15,7 +15,6 @@ export const AddHouse = () => {
         value={url}
         onChange={handleChange}
       />
-      <button>Add House</button>
     </form>
   )
 }

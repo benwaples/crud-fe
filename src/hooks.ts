@@ -23,12 +23,19 @@ export const useUrl = (): addUrl => {
     return house
   }
 
+  const handleClick = async() => {
+    const house = await addHouse({ url})
+    setHouseAdded(true)
+    return house
+  }
+
 
   return {
     url,
     houseAdded, 
     handleChange, 
-    useHandleSubmit
+    useHandleSubmit,
+    handleClick
   }
 }
 

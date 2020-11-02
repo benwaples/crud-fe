@@ -21,6 +21,7 @@ export type addUrl = {
   url: string,
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   useHandleSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
+  handleClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
   houseAdded: boolean
 }
 

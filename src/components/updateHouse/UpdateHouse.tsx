@@ -18,8 +18,8 @@ export const UpdateHouse = ({ id}: { id: number}) => {
     return useHandleSubmit
   }
   return (
-    <div>
-      <form onSubmit={useHandleSubmit}>
+    <div id="formDiv">
+      <form onSubmit={useHandleSubmit} id="update-form">
       <label htmlFor="address">Address</label>
       <input 
         id="address"
@@ -68,7 +68,7 @@ export const UpdateHouse = ({ id}: { id: number}) => {
         value={saleStatus}
         onChange={useHandleChange}
       />
-      <label htmlFor="lastSold">lastSold</label>
+      <label htmlFor="lastSold">Last Sold</label>
       <input 
         id="lastSold"
         type="text"
@@ -76,7 +76,7 @@ export const UpdateHouse = ({ id}: { id: number}) => {
         value={lastSold}
         onChange={useHandleChange}
       />
-      <button onClick={handleClick}>Add House</button>
+      <button onClick={handleClick}>Update House</button>
     </form>
     </div>
   )
