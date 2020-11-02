@@ -81,3 +81,4 @@ export const UpdateHouse = ({ id}: { id: number}) => {
     </div>
   )
 }
+ 
