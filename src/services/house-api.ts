@@ -37,3 +37,13 @@ export const updateHouse = (id: number, house: House): Promise<House> => {
   )
     .then(res => res.json())
 }
+
+export const deleteHouse = ( id: number ) => {
+  return fetch(`https://glacial-garden-39406.herokuapp.com/api/v1/houses/${id}`, 
+  {
+    method: 'DELETE',
+    headers: {"Content-type": "application/json; charset=UTF-8"}
+  }
+)
+  .then(res => res.json())
+}

@@ -1,13 +1,18 @@
 import React, { useState} from 'react'
 import { useHouseById } from '../../hooks'
+import { deleteHouse } from '../../services/house-api'
 import { UpdateHouse } from '../updateHouse/UpdateHouse'
 
 export const DetailedHouse = ({ id }: { id: number }) => {
   const { house, loading, error } = useHouseById(id)
   const [displayUpdateForm, setDisplay] = useState(false)
 
-  const handleClick = () => {
+  const handleDisplay = () => {
     return setDisplay(true)
+  }
+
+  const handleDelete = () => {
+    return deleteHouse(id)
   }
 
   if(loading) return <h1>Loading...</h1>
@@ -24,7 +29,8 @@ export const DetailedHouse = ({ id }: { id: number }) => {
       {displayUpdateForm ?
         <UpdateHouse id={id} /> 
         : 
-        <button onClick={handleClick}>Update House</button>}
+        <button onClick={handleDisplay}>Update House</button>}
+      <button onClick={handleDelete}>Delete House</button>
     </div>
   )
 }
