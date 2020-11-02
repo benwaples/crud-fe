@@ -4,7 +4,6 @@ const api = process.env.LOCALHOST
 
 
 export const addHouse = (url: {url: string}) => {
-  console.log(JSON.stringify(url))
   try{
   return fetch('https://glacial-garden-39406.herokuapp.com/api/v1/houses', {
     method: 'POST',
@@ -25,5 +24,16 @@ export const getHouses = (): Promise<House[]> => {
 
 export const getHouseById = (id: string): Promise<House> => {
   return fetch(`https://glacial-garden-39406.herokuapp.com/api/v1/houses/${id}`)
+    .then(res => res.json())
+}
+
+export const updateHouse = (id: string, house: House): Promise<House> => {
+  return fetch(`https://glacial-garden-39406.herokuapp.com/api/v1/houses/${id}`, 
+    {
+      method: 'PATCH',
+      body: JSON.stringify(house),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+    }
+  )
     .then(res => res.json())
 }

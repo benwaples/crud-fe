@@ -34,6 +34,15 @@ export type useHouseByIdType = {
   loading: boolean;
   error: string | null
 }
-// export type MatchProps = {
 
-// }
+export type UseUpdatedHouseType = {
+  address: string, 
+    images: string,
+    price: string,
+    lotSQFT: string,
+    houseSQFT: string,
+    saleStatus: string,
+    lastSold: string,
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void, 
+    handleSubmit:(event: React.FormEvent<HTMLFormElement>) => void
+}

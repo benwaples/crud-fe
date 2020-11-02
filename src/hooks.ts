@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { addHouse, getHouses, getHouseById } from './services/house-api'
+import { addHouse, getHouses, getHouseById, updateHouse } from './services/house-api'
 import { 
   addUrl, 
   House, 
   useHousesType, 
-  useHouseByIdType 
+  useHouseByIdType, 
+  UseUpdatedHouseType
 } from './types'
 
 export const useUrl = (): addUrl => {
@@ -17,8 +18,7 @@ export const useUrl = (): addUrl => {
 
   const useHandleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const house = addHouse({ url })
-    console.log(house)
+    const house = await addHouse({ url })
     setHouseAdded(true)
     return house
   }
@@ -83,5 +83,42 @@ export const useHouseById = (id: string): useHouseByIdType => {
     house,
     loading,
     error
+  }
+}
+
+export const useUpdateHouse = (id: string, house: House): UseUpdatedHouseType => {
+    const [address, setAddress] = useState('')
+    const [images, setImages] = useState('')
+    const [price, setPrice] = useState('')
+    const [lotSQFT, setLotSQFT] = useState('')
+    const [houseSQFT, setHouseSQFT] = useState('')
+    const [saleStatus, setSaleStatus] = useState('')
+    const [lastSold, setLastSold] = useState('')
+
+  const handleChange = ({ currentTarget }: React.ChangeEvent<HTMLInputElement>) => {
+    if(currentTarget.name === 'address') setAddress(currentTarget.value)
+    if(currentTarget.name === 'images') setImages(currentTarget.value)
+    if(currentTarget.name === 'price') setPrice(currentTarget.value)
+    if(currentTarget.name === 'lotSQFT') setLotSQFT(currentTarget.value)
+    if(currentTarget.name === 'houseSQFT') setHouseSQFT(currentTarget.value)
+    if(currentTarget.name === 'saleStatus') setSaleStatus(currentTarget.value)
+    if(currentTarget.name === 'lastSold') setLastSold(currentTarget.value)
+  }  
+
+  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    await updateHouse(id, house)
+  }
+
+  return {
+    address, 
+    images,
+    price,
+    lotSQFT,
+    houseSQFT,
+    saleStatus,
+    lastSold,
+    handleChange, 
+    handleSubmit
   }
 }
