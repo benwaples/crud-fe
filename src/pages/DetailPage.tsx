@@ -2,7 +2,7 @@ import React from 'react'
 import { DetailedHouse } from '../components/detailedHouse/DetailedHouse'
 
 type IdProps = {
-  match: { params: { id: string }}
+  match: { params: { id: number }}
 }
 
 export const DetailPage = ({ match: { params: {id}}}: IdProps) => {

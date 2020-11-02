@@ -43,6 +43,6 @@ export type UseUpdatedHouseType = {
     houseSQFT: string,
     saleStatus: string,
     lastSold: string,
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void, 
-    handleSubmit:(event: React.FormEvent<HTMLFormElement>) => void
+    useHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void, 
+    useHandleSubmit:(event: React.FormEvent<HTMLFormElement>) => void
 }

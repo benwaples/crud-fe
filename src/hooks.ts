@@ -60,7 +60,7 @@ export const useHouses = (): useHousesType => {
   }
 }
 
-export const useHouseById = (id: string): useHouseByIdType => {
+export const useHouseById = (id: number): useHouseByIdType => {
   const [house, setHouse] = useState({id: 1,
     address: '', 
     images: '', 
@@ -86,7 +86,7 @@ export const useHouseById = (id: string): useHouseByIdType => {
   }
 }
 
-export const useUpdateHouse = (id: string, house: House): UseUpdatedHouseType => {
+export const useUpdateHouse = (id: number): UseUpdatedHouseType => {
     const [address, setAddress] = useState('')
     const [images, setImages] = useState('')
     const [price, setPrice] = useState('')
@@ -94,8 +94,20 @@ export const useUpdateHouse = (id: string, house: House): UseUpdatedHouseType =>
     const [houseSQFT, setHouseSQFT] = useState('')
     const [saleStatus, setSaleStatus] = useState('')
     const [lastSold, setLastSold] = useState('')
+    useEffect(() => {
+      getHouseById(id)
+        .then((house: House) => {
+          setAddress(house.address)
+          setImages(house.images)
+          setPrice(house.price)
+          setLotSQFT(house.lotSQFT)
+          setHouseSQFT(house.houseSQFT)
+          setSaleStatus(house.saleStatus)
+          setLastSold(house.lastSold)
+        })
+    }, [id])
 
-  const handleChange = ({ currentTarget }: React.ChangeEvent<HTMLInputElement>) => {
+  const useHandleChange = ({ currentTarget }: React.ChangeEvent<HTMLInputElement>) => {
     if(currentTarget.name === 'address') setAddress(currentTarget.value)
     if(currentTarget.name === 'images') setImages(currentTarget.value)
     if(currentTarget.name === 'price') setPrice(currentTarget.value)
@@ -105,9 +117,9 @@ export const useUpdateHouse = (id: string, house: House): UseUpdatedHouseType =>
     if(currentTarget.name === 'lastSold') setLastSold(currentTarget.value)
   }  
 
-  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+  const useHandleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await updateHouse(id, house)
+    await updateHouse(id, { id, address, images, price, lotSQFT, houseSQFT, saleStatus, lastSold })
   }
 
   return {
@@ -118,7 +130,7 @@ export const useUpdateHouse = (id: string, house: House): UseUpdatedHouseType =>
     houseSQFT,
     saleStatus,
     lastSold,
-    handleChange, 
-    handleSubmit
+    useHandleChange, 
+    useHandleSubmit
   }
 }
